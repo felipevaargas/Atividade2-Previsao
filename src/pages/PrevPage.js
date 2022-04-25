@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 import React, { useState, useLayoutEffect } from 'react'
 import axios from 'axios';
 import PrevInfo from '../components/PrevInfo';
+import { getGeoCode } from '../services/ApiInmet';
 
 export default function App({ route }) {
 
@@ -11,16 +12,10 @@ export default function App({ route }) {
   const [geoCode, setGeoCode] = useState([route.params.paramKeyGeoCode])
 
   useLayoutEffect(() => {
-
     getCurrentDate();
-
-    axios.get(`https://apiprevmet3.inmet.gov.br/previsao/${geoCode}`)
-      .then((response) => {
-        setDados([response.data])
-      })
-      .catch((erro) => {
-        console.log('There has been a problem with your fetch operation: ' + erro.message);
-      })
+    getGeoCode(geoCode)
+      .then(dados => setDados(dados))
+      .catch(erro => console.log(erro))
   }, [])
 
   const getCurrentDate = () => {
@@ -33,7 +28,6 @@ export default function App({ route }) {
 
   return (
     <View>
-
       <FlatList
         data={dados}
         renderItem={({ item }) =>
@@ -76,12 +70,3 @@ export default function App({ route }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-});

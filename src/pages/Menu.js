@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import Button from '../components/Button'
 
 export default function Menu() {
   return (
-    <View>
+    <View style={styles.container}>
       <Button geoCode='4314100' buttonText='Passo Fundo' screenName="PrevPage" />
       <Button geoCode='4311809' buttonText='Marau' screenName="PrevPage" />
       <Button geoCode='4304705' buttonText='Carazinho' screenName="PrevPage" />
@@ -14,3 +14,13 @@ export default function Menu() {
     </View>
   )
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});

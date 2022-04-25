@@ -1,13 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
-
 export default function PrevInfo(props) {
 
     const data = props.dados
     const currentDate = props.date
     const geoCode = props.geoCode
-
-    const [horario, setHorario] = useState(props.horario)
+    const horario = props.horario
 
     const [nomeEntidade, setNomeEntidade] = useState(data[geoCode][currentDate][horario].entidade ? data[geoCode][currentDate][horario].entidade : "")
 
@@ -24,32 +22,27 @@ export default function PrevInfo(props) {
     const [vento, setVento] = useState(data[geoCode][currentDate][horario].int_vento ? data[geoCode][currentDate][horario].int_vento : "")
 
     return (
-        <View>
-            <View>
+            <View style={styles.container}>
                 <Text>
-                    <Text style={{ fontWeight: 'bold', textTransform: 'capitalize' }}> {horario} </Text>
-                    {"\n"}
-                    Cidade: {nomeEntidade}
-                    {"\n"}
-                    UF: {uf}
-                    {"\n"}
-                    Temperatura Maxima: {tempMax}
-                    {"\n"}
-                    Temperatura Minima: {temMin}
-                    {"\n"}
-                    Resumo: {resumo}
-                    {"\n"}
-                    Vento: {vento}
-                    {"\n"}
+                    <Text style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{horario}</Text> {"\n"}
+                    Cidade: {nomeEntidade} {"\n"}
+                    UF: {uf} {"\n"}
+                    Temperatura Máxima: {tempMax} {"\n"}
+                    Temperatura Mínima: {temMin} {"\n"}
+                    Resumo: {resumo} {"\n"}
+                    Vento: {vento} {"\n"}
                     Dia: {diaSemana}
-                    {"\n"}
-
                 </Text>
-
             </View>
-        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        padding: 10,
+        borderRadius: 10,
+        margin: 5,
+        backgroundColor: '#dbdbdb',
+        justifyContent: 'center'
+    }
 });
